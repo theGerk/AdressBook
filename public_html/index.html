@@ -1,34 +1,42 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html lang="en">
 	<head>
-        <link rel="stylesheet" href="styles.css">
 		<title>Address Book</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- if we want to use bootstrap..
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="javascript.js"></script>
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	<body>
-		<script src="javascript.js" type="text/javascript"></script>
         <!-- This tag is for the left side of the page displaying the contacts. -->
-		<div id="contactList">
-            <h5>Contacts</h5>
+		<div id="contactList" class>
+			<!-- The add new person button is always at the top -->
 			<div class="contactEntry" id="addContactBtn" onclick="showNewPlayerDialog()">
 				<img class="contactImage" src="images/plus_button_512.png" alt="Plus"/>
-				<p class="contactName">Add new player</p>
+				<p class="contactName">Add new person</p>
 			</div>
         </div>
         <!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
         <div id="infoEntries">
             <h5>Phone Numbers:</h5>
+			<div class="dataContainer">
+				<div class="dataEntry">
+					<p class="dataDiscription" onclick="convertToInput(this);">Home:</p>
+					<p class="phoneNumber dataValue">987-654-3210</p>
+				</div>
+			</div>
+            <h5>Email Adresses:</h5>
 			<div class="dataDisplay"></div>
-            <h5>Email Adresses</h5>
+            <h5>Home Address:</h5>
 			<div class="dataDisplay"></div>
-            <h5>Home Address</h5>
-			<div class="dataDisplay"></div>
-        </div>
+		</div>
+		<div onclick="convertToInput(this)">
+			<p>hi</p>
+			<input
+		</div>
 	</body>
 </html>

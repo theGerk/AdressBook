@@ -8,3 +8,10 @@
 function showNewPlayerDialog() {
 	alert('hi');
 }
+
+function convertToInput(e) {
+	var elem = document.createElement('input');
+	elem.value = e.firstElementChild.innerHTML;
+
+	alert(e.firstElementChild.innerHTML);
+}
