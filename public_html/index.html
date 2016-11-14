@@ -13,18 +13,21 @@ and open the template in the editor.
 	</head>
 	<body>
         <!-- This tag is for the left side of the page displaying the contacts. Javascript code for modifying contacts can go below the h5 heading. Depending on how the javascript is written some tags may need to be changed or added. -->
-		<div>
+		<div id="contactList">
             <h5>Contacts</h5>
-            <script src="javascript.js"></script>
+			<button class="contactEntry" id="addContactBtn">
+				<img class="contactImage" src="plus_button_512.png"/>
+				Add new player
+			</button>
         </div>
         <!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
-        <div>
-            <h5>Phone Numbers</h5>
-            <script src="javascript.js"></script>
+        <div id="infoEntries">
+            <h5>Phone Numbers:</h5>
+			<div class="dataDisplay"></div>
             <h5>Email Adresses</h5>
-            <script src="javascript.js"></script>
+			<div class="dataDisplay"></div>
             <h5>Home Address</h5>
-            <script src="javascript.js"></script>
+			<div class="dataDisplay"></div>
         </div>
 	</body>
 </html>
