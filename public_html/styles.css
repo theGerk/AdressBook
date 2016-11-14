@@ -9,5 +9,9 @@ and open the template in the editor.
 */
 
 .contactImage{
-	height: 35px;
+	height: 1.2em;
+}
+
+.contactName{
+	font-size: 1em;
 }

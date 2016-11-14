@@ -12,13 +12,14 @@ and open the template in the editor.
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-        <!-- This tag is for the left side of the page displaying the contacts. Javascript code for modifying contacts can go below the h5 heading. Depending on how the javascript is written some tags may need to be changed or added. -->
+		<script src="javascript.js" type="text/javascript"></script>
+        <!-- This tag is for the left side of the page displaying the contacts. -->
 		<div id="contactList">
             <h5>Contacts</h5>
-			<button class="contactEntry" id="addContactBtn">
-				<img class="contactImage" src="plus_button_512.png"/>
-				Add new player
-			</button>
+			<div class="contactEntry" id="addContactBtn" onclick="showNewPlayerDialog()">
+				<img class="contactImage" src="images/plus_button_512.png" alt="Plus"/>
+				<p class="contactName">Add new player</p>
+			</div>
         </div>
         <!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
         <div id="infoEntries">
