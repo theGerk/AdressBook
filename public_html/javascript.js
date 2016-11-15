@@ -5,13 +5,41 @@
  */
 
 //temporary
+
+function makeClick(callback, e) {
+	//make sure not to back propigate.
+	e.stopPropagation();
+
+	//converts all text boxes back into normal thingies
+	var flips = document.getElementsByClassName('convertBack');
+	for (var i = 0; i < flips.length; i++) {
+		convertToText(flips[i]);
+	}
+	callback();
+}
+
 function showNewPlayerDialog() {
 	alert('hi');
 }
 
-function convertToInput(e) {
+function convertToInput(s) {
 	var elem = document.createElement('input');
-	elem.value = e.firstElementChild.innerHTML;
+	elem.value = s.innerHTML;
+	elem.className += ' convertBack';
+	elem.onclick = function () {
+		var e = eval('event');
+		e.stopPropagation();
+	};
+	s.parentElement.replaceChild(elem, s);
+}
 
-	alert(e.firstElementChild.innerHTML);
+function convertToText(s) {
+	var elem = document.createElement('p');
+	elem.innerHTML = s.value === '' ? 'Blank' : s.value;
+	elem.onclick = function () {
+		makeClick(function () {
+			convertToInput(elem);
+		}, eval('event'));
+	};
+	s.parentElement.replaceChild(elem, s);
 }

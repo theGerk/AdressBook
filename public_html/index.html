@@ -11,7 +11,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="javascript.js"></script>
 		<link rel="stylesheet" href="styles.css">
 	</head>
-	<body>
+	<body onclick="makeClick(function () {}, event);">
         <!-- This tag is for the left side of the page displaying the contacts. -->
 		<div id="contactList" class>
 			<!-- The add new person button is always at the top -->
@@ -25,7 +25,10 @@
             <h5>Phone Numbers:</h5>
 			<div class="dataContainer">
 				<div class="dataEntry">
-					<p class="dataDiscription" onclick="convertToInput(this);">Home:</p>
+					<p class="dataDiscription" onclick="var t = this;
+							makeClick(function () {
+								convertToInput(t);
+							}, event);">Home:</p>
 					<p class="phoneNumber dataValue">987-654-3210</p>
 				</div>
 			</div>
@@ -34,9 +37,11 @@
             <h5>Home Address:</h5>
 			<div class="dataDisplay"></div>
 		</div>
-		<div onclick="convertToInput(this)">
-			<p>hi</p>
-			<input
-		</div>
+		<p onclick="var t = this;
+				makeClick(function () {
+					convertToInput(t);
+				}, event);">
+			hi
+		</p>
 	</body>
 </html>
