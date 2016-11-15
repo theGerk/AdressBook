@@ -6,9 +6,17 @@
 
 //temporary
 
-function makeClick(callback, e) {
+/**
+ * Called any time a click is made anywhere.
+ *
+ * Tries to make all text boxes back into text
+ *
+ * @param {Function} callback
+ * @param {Object} event - event object
+ */
+function makeClick(callback, event) {
 	//make sure not to back propigate.
-	e.stopPropagation();
+	event.stopPropagation();
 
 	//converts all text boxes back into normal thingies
 	var flips = document.getElementsByClassName('convertBack');
@@ -24,8 +32,8 @@ function showNewPlayerDialog() {
 
 function convertToInput(s) {
 	var elem = document.createElement('input');
-	elem.value = s.innerHTML;
-	elem.className += ' convertBack';
+	elem.value = s.innerHTML.trim();
+	elem.className = 'convertBack ' + s.className;
 	elem.onclick = function () {
 		var e = eval('event');
 		e.stopPropagation();
@@ -34,12 +42,15 @@ function convertToInput(s) {
 }
 
 function convertToText(s) {
-	var elem = document.createElement('p');
-	elem.innerHTML = s.value === '' ? 'Blank' : s.value;
-	elem.onclick = function () {
-		makeClick(function () {
-			convertToInput(elem);
-		}, eval('event'));
-	};
-	s.parentElement.replaceChild(elem, s);
+	if (s.value.trim() !== '') {
+		var elem = document.createElement('p');
+		elem.className = s.className.substr('convertBack '.length);
+		elem.innerHTML = s.value;
+		elem.onclick = function () {
+			makeClick(function () {
+				convertToInput(elem);
+			}, eval('event'));
+		};
+		s.parentElement.replaceChild(elem, s);
+	}
 }
