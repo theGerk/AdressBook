@@ -53,5 +53,5 @@ function makeNewContact(name, phone, email, home) {
 }
 
 function contactClickEvent(e) {
-
+	alert('silly goose');
 }
