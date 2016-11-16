@@ -5,6 +5,7 @@
  */
 
 
+
 $.getJSON("DATA.json", function (response) {
 	_GlobalData = response;
 });
