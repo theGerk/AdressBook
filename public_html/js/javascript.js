@@ -5,11 +5,15 @@
  */
 
 
-$(document).ready(function () {
+$(function () {
 	$.getJSON("data/DATA.json", function (response) {
-		_GlobalData = response;
+		for (var i = 0; i < response.length; i++) {
+			makeNewContact(response[i]);
+		}
 	});
 });
+
+
 /**
  *
  * @param {Element} element - HTML Element
@@ -36,22 +40,21 @@ function removeClass(element, className) {
 
 /**
  *
- * @param {String} name
- * @param {String} phone
- * @param {String} email
- * @param {String} home
+ * @param {Object} contact
  * @returns {undefined}
  */
-function makeNewContact(name, phone, email, home) {
+function makeNewContact(contact) {
 	var newContactElement = document.createElement('a');
 	addClass(newContactElement, 'list-group-item');
 	newContactElement.href = '#';
-	newContactElement.textContent = name;
+	newContactElement.textContent = contact.name;
+	newContactElement.data = JSON.stringify(contact);
 	newContactElement.onclick = contactClickEvent;
 	var listElement = document.getElementById('ContactList');
 	listElement.appendChild(newContactElement);
 }
 
+
 function contactClickEvent(e) {
-	alert('silly goose');
+	alert('hi');
 }
