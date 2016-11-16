@@ -4,53 +4,32 @@
  * and open the template in the editor.
  */
 
-//temporary
+
+
+$.getJSON("DATA.json", function (response) {
+	_GlobalData = response;
+});
 
 /**
- * Called any time a click is made anywhere.
  *
- * Tries to make all text boxes back into text
- *
- * @param {Function} callback
- * @param {Object} event - event object
+ * @param {Object} element - HTML Element
+ * @param {String} className
  */
-function makeClick(callback, event) {
-	//make sure not to back propigate.
-	event.stopPropagation();
+function addClass(element, className) {
+	element.className += ' ' + className;
+}
 
-	//converts all text boxes back into normal thingies
-	var flips = document.getElementsByClassName('convertBack');
-	for (var i = 0; i < flips.length; i++) {
-		convertToText(flips[i]);
+/**
+ *
+ * @param {Object} element - HTML Element
+ * @param {String} className
+ */
+function removeClass(element, className) {
+	var classes = element.className.split(' ');
+	var str = '';
+	for (var i = 0; i < classes.length; i++) {
+		if (classes[i] !== className)
+			str += ' ' + classes[i];
 	}
-	callback();
-}
-
-function showNewPlayerDialog() {
-	alert('hi');
-}
-
-function convertToInput(s) {
-	var elem = document.createElement('input');
-	elem.value = s.innerHTML.trim();
-	elem.className = 'convertBack ' + s.className;
-	elem.onclick = function () {
-		var e = eval('event');
-		e.stopPropagation();
-	};
-	s.parentElement.replaceChild(elem, s);
-}
-
-function convertToText(s) {
-	if (s.value.trim() !== '') {
-		var elem = document.createElement('p');
-		elem.className = s.className.substr('convertBack '.length);
-		elem.innerHTML = s.value;
-		elem.onclick = function () {
-			makeClick(function () {
-				convertToInput(elem);
-			}, eval('event'));
-		};
-		s.parentElement.replaceChild(elem, s);
-	}
+	element.className = str;
 }

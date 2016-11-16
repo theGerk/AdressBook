@@ -2,46 +2,27 @@
 <html lang="en">
 	<head>
 		<title>Address Book</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- if we want to use bootstrap..
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><script src="javascript.js"></script>
-		<link rel="stylesheet" href="styles.css">
+		<script src="javascript.js"></script>
 	</head>
-	<body onclick="makeClick(function () {}, event);">
-        <!-- This tag is for the left side of the page displaying the contacts. -->
-		<div id="contactList" class>
-			<!-- The add new person button is always at the top -->
-			<div class="contactEntry" id="addContactBtn" onclick="showNewPlayerDialog()">
-				<img class="contactImage" src="images/plus_button_512.png" alt="Plus"/>
-				<p class="contactName">Add new person</p>
-			</div>
-        </div>
-        <!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
-        <div id="infoEntries">
-            <h5>Phone Numbers:</h5>
-			<div class="dataContainer">
-				<div class="dataEntry">
-					<p class="dataDiscription" onclick="var t = this;
-							makeClick(function () {
-								convertToInput(t);
-							}, event);">Home:</p>
-					<p class="phoneNumber dataValue">987-654-3210</p>
+	<body>
+        <!-- This tag is for the left side of the page displaying the contacts. Javascript code for modifying contacts can go below the h5 heading. Depending on how the javascript is written some tags may need to be changed or added. -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-4">
+					<h5>contacts</h5>
+				</div>
+				<!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
+				<div class="col-sm-8">
+					<h5>Phone</h5>
+					<h5>Email</h5>
+					<h5>House</h5>
 				</div>
 			</div>
-            <h5>Email Adresses:</h5>
-			<div class="dataDisplay"></div>
-            <h5>Home Address:</h5>
-			<div class="dataDisplay"></div>
 		</div>
-		<p onclick="var t = this;
-				makeClick(function () {
-					convertToInput(t);
-				}, event);">
-			hi
-		</p>
 	</body>
 </html>
