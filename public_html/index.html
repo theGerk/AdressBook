@@ -1,32 +1,40 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<html lang="en">
 	<head>
-        <link rel="stylesheet" href="styles.css">
 		<title>Address Book</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="javascript.js"></script>
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
 	</head>
 	<body>
-        <!-- This tag is for the left side of the page displaying the contacts. Javascript code for modifying contacts can go below the h5 heading. Depending on how the javascript is written some tags may need to be changed or added. -->
-		<div class="row">
-			<div class="sm-col-4">
-				<h5>contacts</h5>
-			</div>
-			<!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
-			<div class="sm-col-8">
-				<h5>Phone</h5>
-				<h5>Email</h5>
-				<h5>House</h5>
+		<!-- This tag is for the left side of the page displaying the contacts. Javascript code for modifying contacts can go below the h5 heading. Depending on how the javascript is written some tags may need to be changed or added. -->
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="list-group" id="ContactList">
+						<a href="#" class="list-group-item" onclick="makeNewContact();">Create Contact</a>
+					</div>
+				</div>
+				<!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
+				<div class="col-sm-9">
+					<h5>Phone</h5>
+					<h5>Email</h5>
+					<h5>House</h5>
+				</div>
 			</div>
 		</div>
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="js/jquery-3.1.1.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/javascript.js"></script>
 	</body>
 </html>
