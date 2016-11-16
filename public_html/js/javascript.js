@@ -56,5 +56,17 @@ function makeNewContact(contact) {
 
 
 function contactClickEvent(e) {
-	alert('hi');
+	var data = JSON.parse(e.target.data);
+
+	//sets entries to being non-active
+	$(e.target.parentElement).find('.active').removeClass('active');
+
+	//sets thsi entry to being active
+	addClass(e.target, 'active');
+
+	//sets the display part
+	document.getElementById('phoneDisplay').textContent = data.phone;
+	document.getElementById('emailDisplay').textContent = data.email;
+	document.getElementById('addressDisplay').textContent = data.address;
+	document.getElementById('nameDisplay').textContent = data.name;
 }
