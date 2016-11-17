@@ -15,9 +15,17 @@ $(function () {
 	});
 });
 
-
+/**
+ * returns all contacts as an array of objects
+ *
+ * @returns {Object[]} - array of contact objects
+ */
 function getContacts() {
-	alert($('#ContactList').find('a').length);
+	var output = [];
+	$('.contact').each(function (i, elem) {
+		output.push($(elem).data());
+	});
+	return output;
 }
 
 /**
@@ -29,6 +37,7 @@ function getContacts() {
 function makeNewContact(contact) {
 	var $elem = $('<a>');
 	$elem.addClass('list-group-item');
+	$elem.addClass('contact');
 	$elem.text(contact.name);
 	$elem.click(contactClickEvent);
 	$elem.data(contact);
