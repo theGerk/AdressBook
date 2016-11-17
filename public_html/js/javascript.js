@@ -29,13 +29,15 @@ function addClass(element, className) {
  * @param {String} className
  */
 function removeClass(element, className) {
-	var classes = element.className.split(' ');
-	var str = '';
-	for (var i = 0; i < classes.length; i++) {
-		if (classes[i] !== className)
-			str += ' ' + classes[i];
+	if (element != null) {
+		var classes = element.className.split(' ');
+		var str = '';
+		for (var i = 0; i < classes.length; i++) {
+			if (classes[i] !== className)
+				str += ' ' + classes[i];
+		}
+		element.className = str;
 	}
-	element.className = str;
 }
 
 /**
@@ -58,15 +60,26 @@ function makeNewContact(contact) {
 function contactClickEvent(e) {
 	var data = JSON.parse(e.target.data);
 
+	var oldElement = $('#SelectedContact');
 	//sets entries to being non-active
-	$(e.target.parentElement).find('.active').removeClass('active');
+	oldElement.removeClass('active');
+	oldElement.removeAttr('id');
 
-	//sets thsi entry to being active
-	addClass(e.target, 'active');
+	//sets this entry to being active
+	$(e.target).addClass('active').attr('id', 'SelectedContact');
 
 	//sets the display part
 	document.getElementById('phoneDisplay').textContent = data.phone;
 	document.getElementById('emailDisplay').textContent = data.email;
 	document.getElementById('addressDisplay').textContent = data.address;
 	document.getElementById('nameDisplay').textContent = data.name;
+}
+
+function saveButtonHandler() {
+	alert('hi');
+}
+
+
+function deleteButtonHandler() {
+	document.getElementById('ContactList').removeChild(document.getElementById('SelectedContact'));
 }
