@@ -6,6 +6,7 @@
 
 
 $(function () {
+	$('.visibleWithTextDisplay').hide();
 	$.getJSON("data/DATA.json", function (response) {
 		for (var i = 0; i < response.length; i++) {
 			makeNewContact(response[i]);
@@ -16,7 +17,7 @@ $(function () {
 /**
  *
  * @param {Object} contact
- * @returns {undefined}
+ * @returns {jQuery} The newly created object
  */
 function makeNewContact(contact) {
 	var $elem = $('<a>');
@@ -25,6 +26,7 @@ function makeNewContact(contact) {
 	$elem.click(contactClickEvent);
 	$elem.data(contact);
 	$('#ContactList').append($elem);
+	return $elem;
 }
 
 
@@ -66,15 +68,15 @@ function saveButtonHandler() {
 	var $currentSelection = $('#SelectedContact');
 	if ($currentSelection.length === 0) {
 		//make new entry
-		makeNewContact(getDisplay());
+		makeNewContact(getDisplay()).addClass('active').attr('id', 'SelectedContact');
 	} else {
 		//save to current entry
 		var newData = getDisplay();
 		$currentSelection.data(newData);
 		$currentSelection.text(newData.name);
 	}
-	$('#SaveButton').addClass('hidden');
-	$('#EditButton').removeClass('hidden');
+	$('.visibleWithEditDisplay').hide();
+	$('.visibleWithTextDisplay').show();
 }
 
 function editButtonHandler() {
@@ -82,10 +84,11 @@ function editButtonHandler() {
 }
 
 function readyDisplayForEdit() {
-	$('.visibileWithTextDisplay').addClass('hidden');
-	$('.visibileWithEditDisplay').removeClass('hidden');
+	$('.visibleWithTextDisplay').hide();
+	$('.visibleWithEditDisplay').show();
 
 	//make text fields editable
+
 }
 
 function deleteButtonHandler() {
@@ -94,6 +97,10 @@ function deleteButtonHandler() {
 
 function newContactHandler() {
 	emptyDisplay();
+
+	//make no selected contact
+	$('#SelectedContact').removeClass('active').removeAttr('id');
+
 	//allow new contact to be edited
 	readyDisplayForEdit();
 }
@@ -107,5 +114,5 @@ function emptyDisplay() {
 		phone: '',
 		email: '',
 		address: ''
-	})
+	});
 }

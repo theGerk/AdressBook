@@ -27,27 +27,31 @@
 				<div class="col-sm-9">
 					<div class="container-fluid">
 						<div class="jumbotron">
-							<h2 id="nameDisplay" class="hidden visibleWithTextDisplay"></h2>
+							<h2 id="nameDisplay" class="visibleWithTextDisplay"></h2>
+							<input id="nameEdit" class="visibleWithEditDisplay form-control">
 						</div>
 						<div class ="row">
 							<div class="col-sm-3">
 								<h4>Phone</h4>
-								<p id="phoneDisplay" class="hidden visibleWithTextDisplay"></p>
+								<p id="phoneDisplay" class="visibleWithTextDisplay"></p>
+								<input id="phoneEdit" class="visibleWithEditDisplay form-control">
 							</div>
 							<div class="col-sm-3">
 								<h4>Email</h4>
-								<p id="emailDisplay" class="hidden visibleWithTextDisplay"></p>
+								<p id="emailDisplay" class="visibleWithTextDisplay"></p>
+								<input id="emailEdit" class="visibleWithEditDisplay form-control">
 							</div>
 							<div class="col-sm-3">
 								<h4>House</h4>
-								<p id="addressDisplay" class="hidden visibleWithTextDisplay"></p>
+								<p id="addressDisplay" class="visibleWithTextDisplay"></p>
+								<input id="addressEdit" class="visibleWithEditDisplay form-control">
 							</div>
 							<div class="col-sm-3">
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-sm-6">
-											<button id="SaveButton" class="btn btn-primary hidden visibleWithTextDisplay" onclick="saveButtonHandler();">Save</button>
-											<button id="EditButton" class="btn btn-primary visibleWithEditDisplay" onclick="editButtonHandler();">Edit</button>
+											<button id="SaveButton" class="btn btn-primary visibleWithEditDisplay" onclick="saveButtonHandler();">Save</button>
+											<button id="EditButton" class="btn btn-primary visibleWithTextDisplay" onclick="editButtonHandler();">Edit</button>
 										</div>
 										<div class="col-sm-6">
 											<button class="btn btn-primary" onclick="deleteButtonHandler();">delete</button>
