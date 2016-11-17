@@ -41,21 +41,29 @@ function contactClickEvent(e) {
 	$target.addClass('active').attr('id', 'SelectedContact');
 
 	//sets the display part
-	setDisplay(data);
+	endEditDisplay();
+	setTextDisplay(data);
 }
 
 /**
  *
  * @param {Object} dataObj - has a phone, email, address, and name property which are all strings.
  */
-function setDisplay(dataObj) {
+function setTextDisplay(dataObj) {
 	$('#nameDisplay').text(dataObj.name);
 	$('#phoneDisplay').text(dataObj.phone);
 	$('#emailDisplay').text(dataObj.email);
 	$('#addressDisplay').text(dataObj.address);
 }
 
-function getDisplay() {
+function setEditDisplay(dataObj) {
+	$('#nameEdit').val(dataObj.name);
+	$('#phoneEdit').val(dataObj.phone);
+	$('#emailEdit').val(dataObj.email);
+	$('#addressEdit').val(dataObj.address);
+}
+
+function getTextDisplay() {
 	return {
 		name: $('#nameDisplay').text(),
 		phone: $('#phoneDisplay').text(),
@@ -64,35 +72,50 @@ function getDisplay() {
 	};
 }
 
+function getEditDisplay() {
+	return {
+		name: $('#nameEdit').val(),
+		phone: $('#phoneEdit').val(),
+		email: $('#emailEdit').val(),
+		address: $('#addressEdit').val()
+	};
+}
+
 function saveButtonHandler() {
+	endEditDisplay();
 	var $currentSelection = $('#SelectedContact');
 	if ($currentSelection.length === 0) {
 		//make new entry
-		makeNewContact(getDisplay()).addClass('active').attr('id', 'SelectedContact');
+		makeNewContact(getTextDisplay()).addClass('active').attr('id', 'SelectedContact');
 	} else {
 		//save to current entry
-		var newData = getDisplay();
+		var newData = getTextDisplay();
 		$currentSelection.data(newData);
 		$currentSelection.text(newData.name);
 	}
+}
+
+
+function editButtonHandler() {
+	startEditDisplay();
+}
+
+function startEditDisplay() {
+	setEditDisplay(getTextDisplay());
+	$('.visibleWithTextDisplay').hide();
+	$('.visibleWithEditDisplay').show();
+
+}
+
+function endEditDisplay() {
+	setTextDisplay(getEditDisplay());
 	$('.visibleWithEditDisplay').hide();
 	$('.visibleWithTextDisplay').show();
 }
 
-function editButtonHandler() {
-	readyDisplayForEdit();
-}
-
-function readyDisplayForEdit() {
-	$('.visibleWithTextDisplay').hide();
-	$('.visibleWithEditDisplay').show();
-
-	//make text fields editable
-
-}
-
 function deleteButtonHandler() {
 	$('#SelectedContact').remove();
+	startEditDisplay();
 }
 
 function newContactHandler() {
@@ -102,14 +125,14 @@ function newContactHandler() {
 	$('#SelectedContact').removeClass('active').removeAttr('id');
 
 	//allow new contact to be edited
-	readyDisplayForEdit();
+	startEditDisplay();
 }
 
 /**
  * sets display to being empty
  */
 function emptyDisplay() {
-	setDisplay({
+	setTextDisplay({
 		name: '',
 		phone: '',
 		email: '',
