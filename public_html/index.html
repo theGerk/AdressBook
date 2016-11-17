@@ -20,33 +20,34 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="list-group" id="ContactList">
-						<a href="#" class="list-group-item" onclick="makeNewContact({name: 'hi', phone: '952', email: 'stienmee', address: 'nah'})">Create Contact</a>
+						<a class="list-group-item" onclick="newContactHandler();">Create Contact</a>
 					</div>
 				</div>
 				<!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
 				<div class="col-sm-9">
 					<div class="container-fluid">
 						<div class="jumbotron">
-							<h2 id="nameDisplay"></h2>
+							<h2 id="nameDisplay" class="hidden visibleWithTextDisplay"></h2>
 						</div>
 						<div class ="row">
 							<div class="col-sm-3">
 								<h4>Phone</h4>
-								<p id="phoneDisplay"></p>
+								<p id="phoneDisplay" class="hidden visibleWithTextDisplay"></p>
 							</div>
 							<div class="col-sm-3">
 								<h4>Email</h4>
-								<p id="emailDisplay"></p>
+								<p id="emailDisplay" class="hidden visibleWithTextDisplay"></p>
 							</div>
 							<div class="col-sm-3">
 								<h4>House</h4>
-								<p id="addressDisplay"></p>
+								<p id="addressDisplay" class="hidden visibleWithTextDisplay"></p>
 							</div>
 							<div class="col-sm-3">
 								<div class="container-fluid">
 									<div class="row">
 										<div class="col-sm-6">
-											<button class="btn btn-primary" onclick="saveButtonHandler();">Save</button>
+											<button id="SaveButton" class="btn btn-primary hidden visibleWithTextDisplay" onclick="saveButtonHandler();">Save</button>
+											<button id="EditButton" class="btn btn-primary visibleWithEditDisplay" onclick="editButtonHandler();">Edit</button>
 										</div>
 										<div class="col-sm-6">
 											<button class="btn btn-primary" onclick="deleteButtonHandler();">delete</button>
