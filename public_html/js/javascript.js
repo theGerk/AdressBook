@@ -6,6 +6,7 @@
 
 
 $(function () {
+	emptyDisplay();
 	$('.visibleWithTextDisplay').hide();
 	$.getJSON("data/DATA.json", function (response) {
 		for (var i = 0; i < response.length; i++) {
@@ -132,10 +133,12 @@ function newContactHandler() {
  * sets display to being empty
  */
 function emptyDisplay() {
-	setTextDisplay({
+	var empty = {
 		name: '',
 		phone: '',
 		email: '',
 		address: ''
-	});
+	};
+	setTextDisplay(empty);
+	setEditDisplay(empty);
 }

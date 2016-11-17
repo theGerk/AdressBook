@@ -1,4 +1,13 @@
-{
-	"className": "hi my name is hi",
-	"name": "Benji"
-}
+[
+	{
+		"name": "Benji",
+		"address": "12805 46th ave N, Plymouth MN, 55442",
+		"phone": "7637322137",
+		"email": "benji@altmansoftwaredesign.com"
+	}, {
+		"name": "alen",
+		"address": "IDK",
+		"phone": "IDK",
+		"email": "IDK"
+	}
+]
