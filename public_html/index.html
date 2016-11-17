@@ -25,14 +25,37 @@
 				</div>
 				<!-- This tag is for the right side of the page displaying the contact info. Javascript code for modifying contact info can go below the h5 headings. Depending on how the javascript is written some tags may need to be changed or added. -->
 				<div class="col-sm-9">
-					<h4>Name</h4>
-					<p id="nameDisplay"></p>
-					<h5>Phone</h5>
-					<p id="phoneDisplay"></p>
-					<h5>Email</h5>
-					<p id="emailDisplay"></p>
-					<h5>House</h5>
-					<p id="addressDisplay"></p>
+					<div class="container-fluid">
+						<div class="jumbotron">
+							<h2 id="nameDisplay"></h2>
+						</div>
+						<div class ="row">
+							<div class="col-sm-3">
+								<h4>Phone</h4>
+								<p id="phoneDisplay"></p>
+							</div>
+							<div class="col-sm-3">
+								<h4>Email</h4>
+								<p id="emailDisplay"></p>
+							</div>
+							<div class="col-sm-3">
+								<h4>House</h4>
+								<p id="addressDisplay"></p>
+							</div>
+							<div class="col-sm-3">
+								<div class="container-fluid">
+									<div class="row">
+										<div class="col-sm-6">
+											<button class="btn btn-primary" onclick="saveButtonHandler();">Save</button>
+										</div>
+										<div class="col-sm-6">
+											<button class="btn btn-primary" onclick="deleteButtonHandler();">delete</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
