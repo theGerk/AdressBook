@@ -6,6 +6,8 @@
 
 
 $(function () {
+	emptyDisplay();
+	$('.visibleWithTextDisplay').hide();
 	$.getJSON("data/DATA.json", function (response) {
 		for (var i = 0; i < response.length; i++) {
 			makeNewContact(response[i]);
@@ -13,73 +15,130 @@ $(function () {
 	});
 });
 
-
-/**
- *
- * @param {Element} element - HTML Element
- * @param {String} className
- */
-function addClass(element, className) {
-	element.className += ' ' + className;
-}
-
-/**
- *
- * @param {Element} element - HTML Element
- * @param {String} className
- */
-function removeClass(element, className) {
-	if (element != null) {
-		var classes = element.className.split(' ');
-		var str = '';
-		for (var i = 0; i < classes.length; i++) {
-			if (classes[i] !== className)
-				str += ' ' + classes[i];
-		}
-		element.className = str;
-	}
-}
-
 /**
  *
  * @param {Object} contact
- * @returns {undefined}
+ * @returns {jQuery} The newly created object
  */
 function makeNewContact(contact) {
-	var newContactElement = document.createElement('a');
-	addClass(newContactElement, 'list-group-item');
-	newContactElement.href = '#';
-	newContactElement.textContent = contact.name;
-	newContactElement.data = JSON.stringify(contact);
-	newContactElement.onclick = contactClickEvent;
-	var listElement = document.getElementById('ContactList');
-	listElement.appendChild(newContactElement);
+	var $elem = $('<a>');
+	$elem.addClass('list-group-item');
+	$elem.text(contact.name);
+	$elem.click(contactClickEvent);
+	$elem.data(contact);
+	$('#ContactList').append($elem);
+	return $elem;
 }
 
 
 function contactClickEvent(e) {
-	var data = JSON.parse(e.target.data);
+	var $target = $(e.target);
+	var data = $target.data();
 
-	var oldElement = $('#SelectedContact');
 	//sets entries to being non-active
-	oldElement.removeClass('active');
-	oldElement.removeAttr('id');
+	$('#SelectedContact').removeClass('active').removeAttr('id');
 
 	//sets this entry to being active
-	$(e.target).addClass('active').attr('id', 'SelectedContact');
+	$target.addClass('active').attr('id', 'SelectedContact');
 
 	//sets the display part
-	document.getElementById('phoneDisplay').textContent = data.phone;
-	document.getElementById('emailDisplay').textContent = data.email;
-	document.getElementById('addressDisplay').textContent = data.address;
-	document.getElementById('nameDisplay').textContent = data.name;
+	endEditDisplay();
+	setTextDisplay(data);
+}
+
+/**
+ *
+ * @param {Object} dataObj - has a phone, email, address, and name property which are all strings.
+ */
+function setTextDisplay(dataObj) {
+	$('#nameDisplay').text(dataObj.name);
+	$('#phoneDisplay').text(dataObj.phone);
+	$('#emailDisplay').text(dataObj.email);
+	$('#addressDisplay').text(dataObj.address);
+}
+
+function setEditDisplay(dataObj) {
+	$('#nameEdit').val(dataObj.name);
+	$('#phoneEdit').val(dataObj.phone);
+	$('#emailEdit').val(dataObj.email);
+	$('#addressEdit').val(dataObj.address);
+}
+
+function getTextDisplay() {
+	return {
+		name: $('#nameDisplay').text(),
+		phone: $('#phoneDisplay').text(),
+		email: $('#emailDisplay').text(),
+		address: $('#addressDisplay').text()
+	};
+}
+
+function getEditDisplay() {
+	return {
+		name: $('#nameEdit').val(),
+		phone: $('#phoneEdit').val(),
+		email: $('#emailEdit').val(),
+		address: $('#addressEdit').val()
+	};
 }
 
 function saveButtonHandler() {
-	alert('hi');
+	endEditDisplay();
+	var $currentSelection = $('#SelectedContact');
+	if ($currentSelection.length === 0) {
+		//make new entry
+		makeNewContact(getTextDisplay()).addClass('active').attr('id', 'SelectedContact');
+	} else {
+		//save to current entry
+		var newData = getTextDisplay();
+		$currentSelection.data(newData);
+		$currentSelection.text(newData.name);
+	}
 }
 
 
+function editButtonHandler() {
+	startEditDisplay();
+}
+
+function startEditDisplay() {
+	setEditDisplay(getTextDisplay());
+	$('.visibleWithTextDisplay').hide();
+	$('.visibleWithEditDisplay').show();
+
+}
+
+function endEditDisplay() {
+	setTextDisplay(getEditDisplay());
+	$('.visibleWithEditDisplay').hide();
+	$('.visibleWithTextDisplay').show();
+}
+
 function deleteButtonHandler() {
-	document.getElementById('ContactList').removeChild(document.getElementById('SelectedContact'));
+	$('#SelectedContact').remove();
+	startEditDisplay();
+}
+
+function newContactHandler() {
+	emptyDisplay();
+
+	//make no selected contact
+	$('#SelectedContact').removeClass('active').removeAttr('id');
+
+	//allow new contact to be edited
+	startEditDisplay();
+}
+
+/**
+ * sets display to being empty
+ */
+function emptyDisplay() {
+	var empty = {
+		name: '',
+		phone: '',
+		email: '',
+		address: ''
+	};
+	setTextDisplay(empty);
+	setEditDisplay(empty);
 }
