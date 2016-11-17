@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-
+//starts on document open
 $(function () {
 	emptyDisplay();
 	$('.visibleWithTextDisplay').hide();
@@ -16,6 +16,20 @@ $(function () {
 });
 
 /**
+ * returns all contacts as an array of objects
+ *
+ * @returns {Object[]} - array of contact objects
+ */
+function getContacts() {
+	var output = [];
+	$('.contact').each(function (i, elem) {
+		output.push($(elem).data());
+	});
+	return output;
+}
+
+/**
+ * Makes a new contact at the end of the list and returns the object
  *
  * @param {Object} contact
  * @returns {jQuery} The newly created object
@@ -23,6 +37,7 @@ $(function () {
 function makeNewContact(contact) {
 	var $elem = $('<a>');
 	$elem.addClass('list-group-item');
+	$elem.addClass('contact');
 	$elem.text(contact.name);
 	$elem.click(contactClickEvent);
 	$elem.data(contact);
@@ -30,7 +45,11 @@ function makeNewContact(contact) {
 	return $elem;
 }
 
-
+/**
+ * event handler for clicking on any contact entry
+ *
+ * @param {Event} e
+ */
 function contactClickEvent(e) {
 	var $target = $(e.target);
 	var data = $target.data();
@@ -47,6 +66,7 @@ function contactClickEvent(e) {
 }
 
 /**
+ * Sets the display text, for display setup (non-edit)
  *
  * @param {Object} dataObj - has a phone, email, address, and name property which are all strings.
  */
@@ -57,6 +77,12 @@ function setTextDisplay(dataObj) {
 	$('#addressDisplay').text(dataObj.address);
 }
 
+
+/**
+ * Sets the display text, for edit setup
+ *
+ * @param {Object} dataObj - has a phone, email, address, and name property which are all strings.
+ */
 function setEditDisplay(dataObj) {
 	$('#nameEdit').val(dataObj.name);
 	$('#phoneEdit').val(dataObj.phone);
@@ -64,6 +90,11 @@ function setEditDisplay(dataObj) {
 	$('#addressEdit').val(dataObj.address);
 }
 
+/**
+ * gets a contact object based on what is in display text for non-edit mode
+ *
+ * @returns {Object} - has name, email, address, and phone properties, each of which is a string
+ */
 function getTextDisplay() {
 	return {
 		name: $('#nameDisplay').text(),
@@ -73,6 +104,12 @@ function getTextDisplay() {
 	};
 }
 
+
+/**
+ * gets a contact object based on what is in display text for non-edit mode
+ *
+ * @returns {Object} - has name, email, address, and phone properties, each of which is a string
+ */
 function getEditDisplay() {
 	return {
 		name: $('#nameEdit').val(),
@@ -82,25 +119,37 @@ function getEditDisplay() {
 	};
 }
 
+/**
+ * handles a save button click event
+ *
+ */
 function saveButtonHandler() {
+	//switch to text display
 	endEditDisplay();
+
+	//the current selection as jQuery object
 	var $currentSelection = $('#SelectedContact');
 	if ($currentSelection.length === 0) {
-		//make new entry
+		//make new entry if there is no current object
 		makeNewContact(getTextDisplay()).addClass('active').attr('id', 'SelectedContact');
 	} else {
-		//save to current entry
+		//save current data if there is a current object
 		var newData = getTextDisplay();
 		$currentSelection.data(newData);
 		$currentSelection.text(newData.name);
 	}
 }
 
-
+/**
+ * Handles edit button click event
+ */
 function editButtonHandler() {
 	startEditDisplay();
 }
 
+/**
+ * changes display to being edit setup
+ */
 function startEditDisplay() {
 	setEditDisplay(getTextDisplay());
 	$('.visibleWithTextDisplay').hide();
@@ -108,17 +157,26 @@ function startEditDisplay() {
 
 }
 
+/**
+ * changes display to be normal display setup
+ */
 function endEditDisplay() {
 	setTextDisplay(getEditDisplay());
 	$('.visibleWithEditDisplay').hide();
 	$('.visibleWithTextDisplay').show();
 }
 
+/**
+ * handles delete button event
+ */
 function deleteButtonHandler() {
 	$('#SelectedContact').remove();
 	startEditDisplay();
 }
 
+/**
+ * handles new contact click event
+ */
 function newContactHandler() {
 	emptyDisplay();
 
