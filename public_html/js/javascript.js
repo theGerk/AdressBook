@@ -13,41 +13,16 @@ $(function () {
 	});
 });
 
-
-/**
- *
- * @param {Element} element - HTML Element
- * @param {String} className
- */
-function addClass(element, className) {
-	element.className += ' ' + className;
-}
-
-/**
- *
- * @param {Element} element - HTML Element
- * @param {String} className
- */
-function removeClass(element, className) {
-	if (element != null) {
-		var classes = element.className.split(' ');
-		var str = '';
-		for (var i = 0; i < classes.length; i++) {
-			if (classes[i] !== className)
-				str += ' ' + classes[i];
-		}
-		element.className = str;
-	}
-}
-
 /**
  *
  * @param {Object} contact
  * @returns {undefined}
  */
 function makeNewContact(contact) {
+
+	//maybe convert to JQuery for readability
 	var newContactElement = document.createElement('a');
-	addClass(newContactElement, 'list-group-item');
+	newContactElement.className = 'list-group-item';
 	newContactElement.href = '#';
 	newContactElement.textContent = contact.name;
 	newContactElement.data = JSON.stringify(contact);
@@ -60,26 +35,26 @@ function makeNewContact(contact) {
 function contactClickEvent(e) {
 	var data = JSON.parse(e.target.data);
 
-	var oldElement = $('#SelectedContact');
 	//sets entries to being non-active
-	oldElement.removeClass('active');
-	oldElement.removeAttr('id');
+	$('#SelectedContact').removeClass('active').removeAttr('id');
 
 	//sets this entry to being active
 	$(e.target).addClass('active').attr('id', 'SelectedContact');
 
 	//sets the display part
-	document.getElementById('phoneDisplay').textContent = data.phone;
-	document.getElementById('emailDisplay').textContent = data.email;
-	document.getElementById('addressDisplay').textContent = data.address;
-	document.getElementById('nameDisplay').textContent = data.name;
+	$('#phoneDisplay').text(data.phone);
+	$('#emailDisplay').text(data.email);
+	$('#addressDisplay').text(data.address);
+	$('#nameDisplay').text(data.name);
 }
 
 function saveButtonHandler() {
-	alert('hi');
+	var currentSelection = $('#SelectContact');
+	if (currentSelection.lengthh === 0)
+		alert('hi');
 }
 
 
 function deleteButtonHandler() {
-	document.getElementById('ContactList').removeChild(document.getElementById('SelectedContact'));
+	$('#SelectedContact').remove();
 }
