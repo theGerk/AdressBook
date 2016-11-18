@@ -8,25 +8,47 @@
 $(function () {
 	emptyDisplay();
 	$('.visibleWithTextDisplay').hide();
-	$.getJSON("data/DATA.json", function (response) {
-		for (var i = 0; i < response.length; i++) {
-			makeNewContact(response[i]);
-		}
-	});
+
+	if (localStorage.data === undefined) {	//if the data is unused, get from the DATA.json file
+		$.getJSON("data/DATA.json", appendData);
+		localStorage.data = getCurrentData;
+	} else {								//if the data is used, get it from there
+		appendData(JSON.parse(localStorage.data));
+	}
 });
+
+
+/**
+ * Sets back to a start state.
+ */
+function removeContacts() {
+	$('.contact').remove();
+	delete localStorage.data;
+}
 
 /**
  * returns all contacts as an array of objects
  *
  * @returns {Object[]} - array of contact objects
  */
-function getContacts() {
+function getCurrentData() {
 	var output = [];
 	$('.contact').each(function (i, elem) {
 		output.push($(elem).data());
 	});
 	return output;
 }
+
+
+/**
+ * appends aditional contacts based on what is in the array
+ * @param {Object[]} contactArray
+ */
+var appendData = function (contactArray) {
+	for (var i = 0; i < contactArray.length; i++) {
+		makeNewContact(contactArray[i]);
+	}
+};
 
 /**
  * Makes a new contact at the end of the list and returns the object
@@ -138,6 +160,8 @@ function saveButtonHandler() {
 		$currentSelection.data(newData);
 		$currentSelection.text(newData.name);
 	}
+
+	localStorage.data = JSON.stringify(getCurrentData());
 }
 
 /**
