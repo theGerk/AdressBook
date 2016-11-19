@@ -28,7 +28,7 @@ This file contains code that handles data population and editing. It also contai
 Removes all contacts.
 
 \subsubsection{getCurrentData}
-Pulls contact data from the current list of contacts and returns them as a jsonarray,
+Pulls contact data from the current list of contacts and returns them as a JavaScript Array Object,
 
 \subsubsection{makeNewContact}
 Pulls user input and builds an new contact object. 
@@ -46,7 +46,7 @@ Posts contact information on page for editable display
 Pulls data from the non-editable display, to post to the editable display.
 
 \subsubsection{saveButtonHandler}
-On save button press, endEditDisplay() is called and if user added data is present, it's placed in the jsonarry.
+On save button press, switchs back to display mode for text, and either saves the current displayed information to the current contact, or saves it as a new contact if there is no selected contact.
 
 \subsubsection{newContactHandler}
 Dumps any current information on the page by calling in emptyDisplay(). Then, switches to the editable display by calling startEditDisplay().
