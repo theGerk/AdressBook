@@ -19,12 +19,38 @@ This is a web application that allows the user to store and modify their address
 The program is split into three main parts: An HTML layout found in index.html, a CSS layout found in styles.css, and a JavaScript controller found in javascript.js.
 
 \subsection{index.html}
-This file defines the general makeup of information to be displayed on the site. It's purpose is to act as a location template for where the css and javascipt will place, edit, and style the data on the page.
-
-\subsection{styles.css}
-This file sets the parameters for how the template should be displayed.
+This file defines the general makeup of information to be displayed on the site. It's purpose is to act as a location template for where the css and javascipt will place, edit, and style the data on the page. Using bootstrap tools, the css is integrated into this file. 
 
 \subsection{javascript.js}
 This file contains code that handles data population and editing. It also contains code for user interface options, like buttons and selection. 
+
+\subsubsection{removeContacts}
+Removes all contacts.
+
+\subsubsection{getCurrentData}
+Pulls contact data from the current list of contacts and returns them as a jsonarray,
+
+\subsubsection{makeNewContact}
+Pulls user input and builds an new contact object. 
+
+\subsubsection{contactClickEvent}
+Listens for click on a contact, then displays the contact information by calling endEditDisplay() and setTextDisplay().
+
+\subsubsection{setTextDisplay}
+Posts contact information on page for non-editable display.
+
+\subsubsection{setEditDisplay}
+Posts contact information on page for editable display
+
+\subsubsection{getEditDisplay}
+Pulls data from the non-editable display, to post to the editable display.
+
+\subsubsection{saveButtonHandler}
+On save button press, endEditDisplay() is called and if user added data is present, it's placed in the jsonarry.
+
+\subsubsection{newContactHandler}
+Dumps any current information on the page by calling in emptyDisplay(). Then, switches to the editable display by calling startEditDisplay().
+
+
 
 \end{document}
